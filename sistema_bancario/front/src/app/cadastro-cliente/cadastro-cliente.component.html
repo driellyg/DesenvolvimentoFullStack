@@ -1,0 +1,167 @@
+<main>
+  <h1>Cadastro</h1>
+
+  <form #target="ngForm" (ngSubmit)="onSubmit(target)">
+    <section class="dados">
+      <h2>Dados Pessoais</h2>
+      <div class="input-radio">
+        <label>
+          <input
+            [(ngModel)]="tipoPessoa"
+            name="tipoPessoa"
+            #ref1
+            type="radio"
+            value="pf"
+            (click)="handleChangePessoa(ref1)"
+            checked
+          />
+          Pessoa Física
+        </label>
+        <label>
+          <input
+            [(ngModel)]="tipoPessoa"
+            name="tipoPessoa"
+            #ref2
+            type="radio"
+            value="pj"
+            (click)="handleChangePessoa(ref2)"
+          />
+          Pessoa Jurídica
+        </label>
+      </div>
+
+      <div class="container">
+        <input
+          ngModel
+          name="nome"
+          class="input-item"
+          type="text"
+          placeholder="Nome"
+          ngNativeValidate
+        />
+        <input
+          ngModel
+          name="cpf"
+          *ngIf="tipoPessoa === 'pf'"
+          class="input-item"
+          type="text"
+          placeholder="CPF"
+          ngNativeValidate
+        />
+        <input
+          ngModel
+          name="cnpj"
+          *ngIf="tipoPessoa === 'pj'"
+          class="input-item"
+          type="text"
+          placeholder="CNPJ"
+          ngNativeValidate
+        />
+        <input
+          ngModel
+          name="endereco"
+          class="input-item"
+          type="text"
+          placeholder="Endereço"
+          ngNativeValidate
+        />
+        <input
+          ngModel
+          name="dataNascimento"
+          *ngIf="tipoPessoa === 'pf'"
+          class="input-item"
+          type="date"
+          placeholder="Data de Nascimento"
+          ngNativeValidate
+        />
+        <input
+          ngModel
+          name="atividade"
+          *ngIf="tipoPessoa === 'pj'"
+          class="input-item"
+          type="text"
+          placeholder="Atividade"
+          ngNativeValidate
+        />
+        <select
+          *ngIf="tipoPessoa === 'pf'"
+          class="input-item"
+          [(ngModel)]="genderOptions"
+          name="genero"
+          placeholder="Gênero"
+        >
+          <option disabled value="genero">Gênero</option>
+          <option value="masculino">Masculino</option>
+          <option value="feminino">Feminino</option>
+          <option value="outro">Outro</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="dados">
+      <h2>Detalhes da Conta</h2>
+      <div class="input-radio">
+        <label>
+          <input
+            [(ngModel)]="tipoConta"
+            #contaEspecial
+            name="tipoConta"
+            type="radio"
+            value="ce"
+            (click)="handleChangeConta(contaEspecial)"
+          />
+          Conta Especial
+        </label>
+        <label>
+          <input
+            [(ngModel)]="tipoConta"
+            #contaPoupanca
+            name="tipoConta"
+            type="radio"
+            value="cp"
+            (click)="handleChangeConta(contaPoupanca)"
+          />
+          Conta Poupança
+        </label>
+      </div>
+
+      <!-- conta especial -->
+      <div class="container">
+        <input
+          [(ngModel)]="saldo"
+          disabled
+          name="saldo"
+          class="input-item"
+          type="text"
+          placeholder="Saldo"
+          ngNativeValidate
+        />
+        <input
+          *ngIf="tipoConta === 'ce'"
+          disabled
+          [(ngModel)]="limite"
+          name="limite"
+          class="input-item"
+          type="text"
+          placeholder="Limite"
+          ngNativeValidate
+        />
+        <input
+          *ngIf="tipoConta === 'cp'"
+          disabled
+          [(ngModel)]="taxaCorrecao"
+          name="taxa"
+          class="input-item"
+          type="text"
+          placeholder="Taxa de Correção"
+          ngNativeValidate
+        />
+      </div>
+    </section>
+
+    <div class="link-container">
+      <p (click)="handleGoBack()">⇽ Voltar</p>
+      <button class="btn" type="submit">Concluir</button>
+    </div>
+  </form>
+</main>

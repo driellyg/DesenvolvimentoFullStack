@@ -1,0 +1,142 @@
+<main *ngIf="conta">
+  <div class="nav">
+    <div class="nav-left">
+      <h2>Olá, {{ conta.cliente.nome }}</h2>
+      <p>Conta {{ conta.numeroConta }}</p>
+    </div>
+
+    <div class="nav-right">
+      <p (click)="handleLogOut()">Sair</p>
+    </div>
+  </div>
+
+  <div class="account-info-container">
+    <div class="info-item">
+      <p *ngIf="conta.tipo === 'ce'">Saldo Conta Especial</p>
+      <p *ngIf="conta.tipo === 'cp'">Saldo Conta Poupança</p>
+      <p>R${{ conta.saldo }}</p>
+    </div>
+    <div class="info-item">
+      <p *ngIf="conta.tipo === 'ce'">Limite</p>
+      <p *ngIf="conta.tipo === 'cp'">Taxa de Correção</p>
+      <p *ngIf="conta.tipo === 'ce'">R${{ conta.limite }}</p>
+      <p *ngIf="conta.tipo === 'cp'">{{ conta.taxaCorrecao }}%</p>
+    </div>
+  </div>
+
+  <div class="operations">
+    <button (click)="saqueAction = !saqueAction" class="operations-item">
+      Sacar
+    </button>
+    <button
+      (click)="transferenciaAction = !transferenciaAction"
+      class="operations-item"
+    >
+      Transferir
+    </button>
+    <button (click)="depositoAction = !depositoAction" class="operations-item">
+      Depositar
+    </button>
+  </div>
+
+  <button class="btn-relatorio" (click)="relatorioAction = !relatorioAction">
+    Gerar Relatório
+  </button>
+</main>
+
+<div
+  *ngIf="saqueAction"
+  class="modal-container saque"
+  (click)="handleSaqueModal($event)"
+>
+  <div class="modal-content">
+    <h2>Saque</h2>
+    <input
+      class="input-item"
+      [(ngModel)]="valorOperacao"
+      type="text"
+      placeholder="Valor do saque"
+    />
+    <button class="btn" (click)="realizarSaque()">Concluir</button>
+  </div>
+</div>
+
+<div
+  *ngIf="depositoAction"
+  class="modal-container deposito"
+  (click)="handleDepositoModal($event)"
+>
+  <div class="modal-content">
+    <h2>Depósito</h2>
+    <input
+      class="input-item"
+      type="text"
+      [(ngModel)]="valorOperacao"
+      placeholder="Valor do depósito"
+    />
+    <button class="btn" (click)="realizarDeposito()">Concluir</button>
+  </div>
+</div>
+
+<div
+  *ngIf="transferenciaAction"
+  class="modal-container transferencia"
+  (click)="handleTransferenciaModal($event)"
+>
+  <div class="modal-content">
+    <h2>Transferência</h2>
+    <form>
+      <input
+        class="input-item"
+        [(ngModel)]="contaDestino"
+        name="contaDestino"
+        type="text"
+        placeholder="Conta de destino"
+      />
+      <input
+        class="input-item"
+        [(ngModel)]="valorOperacao"
+        name="valorTransferencia"
+        type="text"
+        placeholder="Valor da transferência"
+      />
+      <button type="submit" (click)="realizarTransferencia()" class="btn">
+        Concluir
+      </button>
+    </form>
+  </div>
+</div>
+
+<div
+  *ngIf="relatorioAction"
+  class="modal-container relatorio"
+  (click)="handleRelatorioModal($event)"
+>
+  <div class="modal-content">
+    <h2>Relatório</h2>
+
+    <h4 *ngIf="relatorioError">
+      Não foi possível gerar relatório agora. Atualize a página.
+    </h4>
+    <div *ngIf="!relatorioError" class="card-container">
+      <div class="card" *ngFor="let conta of contas">
+        <div class="left-column">
+          <p>
+            Conta {{ conta.tipo == "cp" ? "Poupança" : "Especial" }}:
+            {{ conta.numeroConta }}
+          </p>
+          <p>Cliente: {{ conta.cliente.nome }}</p>
+        </div>
+
+        <div class="right-column">
+          <p>Saldo: R${{ conta.saldo }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!relatorioError" class="card total">
+      <p>Saldo Total: R${{ handleTotal() }}</p>
+    </div>
+    <button (click)="handleRelatorioModal($event)" class="btn">Ok</button>
+  </div>
+</div>

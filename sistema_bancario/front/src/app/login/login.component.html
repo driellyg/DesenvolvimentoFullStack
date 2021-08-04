@@ -1,0 +1,57 @@
+<main>
+  <aside>
+    <div class="img"></div>
+  </aside>
+
+  <section>
+    <h2>Login</h2>
+
+    <input
+      [(ngModel)]="numeroConta"
+      class="input-item"
+      type="text"
+      placeholder="Conta"
+    />
+    <input
+      *ngIf="tipoPessoa === 'pf'"
+      [(ngModel)]="cpf"
+      class="input-item"
+      type="text"
+      placeholder="CPF"
+    />
+    <input
+      [(ngModel)]="cnpj"
+      *ngIf="tipoPessoa === 'pj'"
+      class="input-item"
+      type="text"
+      placeholder="CNPJ"
+    />
+    <div class="input-radio">
+      <label class="input-radio-item">
+        <input
+          [(ngModel)]="tipoPessoa"
+          name="tipoPessoa"
+          #ref1
+          type="radio"
+          value="pf"
+          (click)="handleChangePessoa(ref1)"
+        />
+        Pessoa Física
+      </label>
+      <label class="input-radio-item">
+        <input
+          [(ngModel)]="tipoPessoa"
+          name="tipoPessoa"
+          #ref2
+          type="radio"
+          value="pj"
+          (click)="handleChangePessoa(ref2)"
+        />
+        Pessoa Jurídica
+      </label>
+    </div>
+
+    <button class="btn" (click)="handleLogin()">Login</button>
+    <p (click)="handleCadastro()">Crie sua conta ⇾</p>
+  </section>
+</main>

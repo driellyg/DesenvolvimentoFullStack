@@ -1,0 +1,62 @@
+main {
+  display: flex;
+  flex-direction: row;
+  width: 970px;
+  height: 665px;
+  padding: 60px;
+  background-color: #fff;
+  border-radius: 20px;
+}
+
+aside {
+  display: flex;
+  align-items: center;
+  flex: 50%;
+}
+
+.img {
+  height: 310px;
+  width: 325px;
+
+  background: url("../../assets/login-icon.png") no-repeat;
+}
+
+section {
+  flex: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+section h2 {
+  align-self: center;
+  margin-bottom: 32px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+p {
+  margin-top: 8px;
+  text-align: center;
+  cursor: pointer;
+}
+
+p:hover {
+  color: #57b846;
+}
+
+button {
+  margin-top: 32px;
+  text-transform: uppercase;
+}
+
+.input-radio {
+  padding: 0 10px;
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+}
