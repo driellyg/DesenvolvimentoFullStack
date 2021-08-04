@@ -1,0 +1,59 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
+* {
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
+  background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
+  background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
+  background: linear-gradient(-135deg, #c850c0, #4158d0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.btn {
+  margin-top: 164px;
+  font-size: 15px;
+  font-weight: bold;
+  width: 400px;
+  height: 50px;
+  border-radius: 20px;
+  border: none;
+  color: #ffffff;
+  background-color: #57b846;
+  cursor: pointer;
+}
+
+.input-item {
+  height: 50px;
+  width: 400px;
+  border-radius: 20px;
+  border-style: none;
+  background-color: #e6e6e6;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 16px;
+  outline: none;
+}
+
+::placeholder {
+  font-size: 15px;
+  font-weight: 500;
+  color: #666666;
+}
